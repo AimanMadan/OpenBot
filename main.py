@@ -11,7 +11,6 @@ handler = logging.FileHandler(filename='dicord.log',
 
 intents = discord.Intents.default()
 intents.message_content = True
-intents.message_content = True
 intents.members = True
   
 
@@ -21,6 +20,13 @@ bot = commands.Bot(command_prefix='#',
 @bot.event
 async def on_ready():
     print("Number One President")
+    
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+    else:
+        await message.channel.send(f"{message.author.mention} Donald Trump Number 1")
     
 @bot.event
 async def on_member_join(member):
