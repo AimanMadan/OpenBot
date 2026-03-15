@@ -6,7 +6,7 @@ import llm
 
 token = settings.discord_token.get_secret_value()
 
-handler = logging.FileHandler(filename='dicord.log',
+handler = logging.FileHandler(filename='discord.log',
                               encoding='utf-8',
                               mode='w')
 
