@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands 
 import logging 
 from config import settings
+import llm
 
 token = settings.discord_token.get_secret_value()
 
@@ -21,12 +22,18 @@ bot = commands.Bot(command_prefix='#',
 async def on_ready():
     print("Number One President")
     
+    
+    
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
+    
     else:
-        await message.channel.send(f"{message.author.mention} Donald Trump Number 1")
+        reply = llm.response(message.content)
+        await message.channel.send(reply)
+    await bot.process_commands(message)
+    
     
 @bot.event
 async def on_member_join(member):
