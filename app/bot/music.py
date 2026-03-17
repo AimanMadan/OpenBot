@@ -98,7 +98,9 @@ class Music(commands.Cog):
 
     # ── Commands ───────────────────────────────────────────────────────
 
-    @app_commands.command(name="play", description="Play a song or add it to the queue.")
+    @app_commands.command(
+        name="play", description="Play a song or add it to the queue."
+    )
     @app_commands.describe(song_query="Search query")
     async def play(self, interaction: discord.Interaction, song_query: str):
         await interaction.response.defer()
@@ -148,7 +150,9 @@ class Music(commands.Cog):
         await interaction.response.defer()
 
         if interaction.guild is None:
-            await interaction.followup.send("This command can only be used in a server.")
+            await interaction.followup.send(
+                "This command can only be used in a server."
+            )
             return
 
         voice_client = interaction.guild.voice_client
@@ -164,7 +168,9 @@ class Music(commands.Cog):
         await interaction.response.defer()
 
         if interaction.guild is None:
-            await interaction.followup.send("This command can only be used in a server.")
+            await interaction.followup.send(
+                "This command can only be used in a server."
+            )
             return
 
         state = self._get_state(interaction.guild.id)
@@ -183,7 +189,9 @@ class Music(commands.Cog):
         await interaction.response.defer()
 
         if interaction.guild is None:
-            await interaction.followup.send("This command can only be used in a server.")
+            await interaction.followup.send(
+                "This command can only be used in a server."
+            )
             return
 
         voice_client = interaction.guild.voice_client
@@ -199,7 +207,9 @@ class Music(commands.Cog):
         await interaction.response.defer()
 
         if interaction.guild is None:
-            await interaction.followup.send("This command can only be used in a server.")
+            await interaction.followup.send(
+                "This command can only be used in a server."
+            )
             return
 
         voice_client = interaction.guild.voice_client
@@ -215,7 +225,9 @@ class Music(commands.Cog):
         await interaction.response.defer()
 
         if interaction.guild is None:
-            await interaction.followup.send("This command can only be used in a server.")
+            await interaction.followup.send(
+                "This command can only be used in a server."
+            )
             return
 
         state = self._get_state(interaction.guild.id)

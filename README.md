@@ -26,7 +26,7 @@ A Discord bot with AI-powered chat (via OpenAI) and music playback with a per-se
 ### 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/AimanMadan/OpenBot.git
 cd DiscordBot
 ```
 
@@ -79,18 +79,33 @@ The container reads secrets from `.env` via the `env_file` directive -- nothing 
 
 When configuring your bot on the [Developer Portal](https://discord.com/developers/applications):
 
-**OAuth2 Scopes** -- `bot`, `applications.commands`
+### OAuth2 Scopes
 
-**Bot Permissions** -- Send Messages, Read Message History, Connect, Speak, Use Slash Commands
-
-**Privileged Gateway Intents** (toggle on in the Bot settings page):
-
-| Intent | Reason |
+| Scope | Required for |
 |---|---|
-| Message Content | Reads message text for the `!` chat prefix |
-| Server Members | Fires `on_member_join` welcome messages |
+| `bot` | Joining servers and responding to events/messages |
+| `applications.commands` | Registering slash commands (`/play`, `/skip`, etc.) |
 
-Generate the invite URL from **OAuth2 > URL Generator** with both scopes and the permissions above, then open it to add the bot to your server.
+### Bot Permissions
+
+| Permission | Required for |
+|---|---|
+| Send Messages | Sending text responses and "Now playing" updates |
+| Read Message History | Following up on deferred slash command interactions |
+| Connect | Joining voice channels |
+| Speak | Transmitting audio in voice channels |
+| Use Slash Commands | Allowing users to invoke `/play`, `/skip`, etc. |
+
+### Privileged Gateway Intents
+
+Toggle these on in the **Bot** settings page:
+
+| Intent | Required for |
+|---|---|
+| Message Content | Reading message text for the `!` chat prefix |
+| Server Members | Firing `on_member_join` welcome messages |
+
+Generate the invite URL from **OAuth2 > URL Generator** with both scopes and all permissions above, then open it to add the bot to your server.
 
 ## Project Structure
 
@@ -110,4 +125,4 @@ app/
 
 ## License
 
-MIT
+This project is licensed under the [MIT License](LICENSE).
