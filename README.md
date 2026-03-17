@@ -4,7 +4,11 @@ A Discord bot with AI-powered chat (via OpenAI) and music playback with a per-se
 
 ## Features
 
-- **AI Chat** -- Prefix any message with `!` to get a response powered by OpenAI.
+- **AI Chat** -- Prefix any message with `!` to get a response powered by OpenAI. The bot remembers recent conversation per channel for contextual replies.
+- **Conversation Context** -- Per-channel message history kept in memory (resets on bot restart). The bot tracks token usage against a 128k context window and **auto-summarizes** when usage reaches 100k tokens, so conversations can run indefinitely without hitting the limit.
+  - `/context_status` -- Show messages stored, token usage, context window percentage, and session totals.
+  - `/context_clear` -- Clear all conversation history for the current channel.
+  - `/context_summarize` -- Summarize the conversation, replace history with the summary, and start fresh.
 - **Music Playback** -- Search YouTube and stream audio into a voice channel with a full queue system.
   - `/play <query>` -- Search and play a track, or add it to the queue.
   - `/skip` -- Skip to the next track in the queue.
@@ -117,10 +121,14 @@ app/
     ├── __init__.py      # Bot class, intents, logging, run()
     ├── music.py         # Music cog -- slash commands and queue engine
     ├── events.py        # Events cog -- on_ready, on_member_join, on_message
+    ├── context.py       # Context cog -- /context_status, /context_clear, /context_summarize
     └── tools/
-        ├── ffmpeg.py        # ffmpeg executable lookup and audio source factory
-        ├── llm.py           # OpenAI chat integration
-        └── musicplayer.py   # yt-dlp search helpers and Track dataclass
+        ├── music/
+        │   ├── ffmpeg.py        # ffmpeg executable lookup and audio source factory
+        │   └── musicplayer.py   # yt-dlp search helpers and Track dataclass
+        └── chat/
+            ├── history.py       # Per-channel in-memory conversation history
+            └── llm.py           # OpenAI chat integration with context
 ```
 
 ## License

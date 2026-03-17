@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-from .tools import llm
+from .tools.chat import llm
 
 
 class Events(commands.Cog):
@@ -12,7 +12,7 @@ class Events(commands.Cog):
         for guild in self.bot.guilds:
             self.bot.tree.copy_global_to(guild=guild)
             await self.bot.tree.sync(guild=guild)
-        print("Number One President")
+        print("OpenBot heartbeat...")
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -23,7 +23,7 @@ class Events(commands.Cog):
         if message.author.bot:
             return
         if message.content.startswith("!"):
-            reply = llm.response(message.content)
+            reply = llm.response(message.channel.id, message.content)
             await message.channel.send(f"{message.author.mention} {reply}")
 
 

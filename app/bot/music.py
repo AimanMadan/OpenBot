@@ -6,8 +6,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from .tools import ffmpeg, musicplayer
-from .tools.musicplayer import Track
+from .tools.music import ffmpeg, musicplayer
+from .tools.music.musicplayer import Track
 
 
 class GuildMusicState:

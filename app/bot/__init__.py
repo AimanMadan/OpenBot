@@ -16,6 +16,7 @@ class DiscordBot(commands.Bot):
     async def setup_hook(self):
         await self.load_extension("bot.music")
         await self.load_extension("bot.events")
+        await self.load_extension("bot.context")
 
 
 bot = DiscordBot(command_prefix="#", intents=intents)
