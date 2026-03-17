@@ -3,6 +3,11 @@ from discord.ext import commands
 from .tools.chat import llm
 
 
+def get_server_name(member) -> str:
+    """Return the Discord server (guild) name for the given member."""
+    return member.guild.name
+
+
 class Events(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -16,7 +21,8 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        await member.send(f"Welcome to {settings.server_name} {member.name}")
+        server_name = get_server_name(member)
+        await member.send(f"Welcome to {server_name} {member.name}")
 
     @commands.Cog.listener()
     async def on_message(self, message):
